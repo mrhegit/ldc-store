@@ -1,13 +1,12 @@
 /**
  * 数据库种子脚本
- * 用于初始化管理员账户和测试数据
+ * 用于初始化示例数据
  *
  * 运行: pnpm db:seed
  */
 
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import bcrypt from "bcryptjs";
 import * as schema from "./schema";
 
 async function seed() {
@@ -24,28 +23,6 @@ async function seed() {
   console.log("🌱 开始初始化数据...");
 
   try {
-    // 创建管理员账户
-    const adminEmail = "admin@example.com";
-    const adminPassword = await bcrypt.hash("admin123", 10);
-
-    const existingAdmin = await db.query.users.findFirst({
-      where: (users, { eq }) => eq(users.email, adminEmail),
-    });
-
-    if (!existingAdmin) {
-      await db.insert(schema.users).values({
-        email: adminEmail,
-        password: adminPassword,
-        name: "管理员",
-        role: "super_admin",
-      });
-      console.log("✅ 管理员账户已创建");
-      console.log("   邮箱: admin@example.com");
-      console.log("   密码: admin123");
-    } else {
-      console.log("ℹ️  管理员账户已存在，跳过创建");
-    }
-
     // 创建示例分类
     const existingCategories = await db.query.categories.findMany();
     if (existingCategories.length === 0) {
@@ -106,4 +83,3 @@ async function seed() {
 }
 
 seed();
-

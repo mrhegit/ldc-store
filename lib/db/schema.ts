@@ -37,25 +37,6 @@ export const paymentMethodEnum = pgEnum("payment_method", [
   "usdt",      // USDT（预留）
 ]);
 
-export const userRoleEnum = pgEnum("user_role", [
-  "admin",     // 管理员
-  "super_admin", // 超级管理员
-]);
-
-// ============================================
-// Users Table (管理员)
-// ============================================
-
-export const users = pgTable("users", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  email: text("email").notNull().unique(),
-  password: text("password").notNull(),
-  name: text("name"),
-  role: userRoleEnum("role").default("admin").notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
-});
-
 // ============================================
 // Categories Table (商品分类)
 // ============================================
@@ -233,9 +214,6 @@ export const ordersRelations = relations(orders, ({ one, many }) => ({
 // Type Exports
 // ============================================
 
-export type User = typeof users.$inferSelect;
-export type NewUser = typeof users.$inferInsert;
-
 export type Category = typeof categories.$inferSelect;
 export type NewCategory = typeof categories.$inferInsert;
 
@@ -257,5 +235,4 @@ export type NewAnnouncement = typeof announcements.$inferInsert;
 export type CardStatus = (typeof cardStatusEnum.enumValues)[number];
 export type OrderStatus = (typeof orderStatusEnum.enumValues)[number];
 export type PaymentMethod = (typeof paymentMethodEnum.enumValues)[number];
-export type UserRole = (typeof userRoleEnum.enumValues)[number];
 
