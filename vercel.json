@@ -2,20 +2,5 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "buildCommand": "pnpm build",
-  "installCommand": "pnpm install",
-  "env": {
-    "DATABASE_URL": "",
-    "AUTH_SECRET": "",
-    "AUTH_TRUST_HOST": "true",
-    "ADMIN_PASSWORD": "",
-    "LDC_PID": "",
-    "LDC_SECRET": "",
-    "LDC_GATEWAY": "https://credit.linux.do/epay",
-    "LINUXDO_CLIENT_ID": "",
-    "LINUXDO_CLIENT_SECRET": "",
-    "NEXT_PUBLIC_SITE_NAME": "",
-    "NEXT_PUBLIC_SITE_DESCRIPTION": "",
-    "ORDER_EXPIRE_MINUTES": "30"
-  },
-  "crons": []
+  "installCommand": "pnpm install"
 }
