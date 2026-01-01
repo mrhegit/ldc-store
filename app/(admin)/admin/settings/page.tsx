@@ -8,9 +8,9 @@ export default function SettingsPage() {
   const siteDescription = process.env.NEXT_PUBLIC_SITE_DESCRIPTION || "未配置";
   
   // 检查支付配置
-  const ldcPid = process.env.LDC_PID;
-  const ldcSecret = process.env.LDC_SECRET;
-  const isPaymentConfigured = !!(ldcPid && ldcSecret);
+  const ldcClientId = process.env.LDC_CLIENT_ID;
+  const ldcClientSecret = process.env.LDC_CLIENT_SECRET;
+  const isPaymentConfigured = !!(ldcClientId && ldcClientSecret);
 
   return (
     <div className="space-y-6">
@@ -94,8 +94,8 @@ export default function SettingsPage() {
               </p>
               <pre className="text-xs bg-zinc-900 text-zinc-100 p-3 rounded-md overflow-x-auto">
 {`# Linux DO Credit 支付配置
-LDC_PID=your_merchant_pid
-LDC_SECRET=your_merchant_secret
+LDC_CLIENT_ID=your_client_id
+LDC_CLIENT_SECRET=your_client_secret
 
 # 可选：自定义支付网关
 LDC_GATEWAY=https://credit.linux.do/epay`}
@@ -136,8 +136,8 @@ NEXT_PUBLIC_SITE_NAME=LDC Store
 NEXT_PUBLIC_SITE_DESCRIPTION=自动发卡系统
 
 # Linux DO Credit 支付
-LDC_PID=your_merchant_pid
-LDC_SECRET=your_merchant_secret
+LDC_CLIENT_ID=your_client_id
+LDC_CLIENT_SECRET=your_client_secret
 LDC_GATEWAY=https://credit.linux.do/epay`}
               </pre>
             </div>

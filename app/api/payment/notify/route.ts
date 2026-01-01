@@ -44,16 +44,16 @@ export async function GET(request: NextRequest) {
   }
 
   // 验证签名
-  const secret = process.env.LDC_SECRET;
+  const secret = process.env.LDC_CLIENT_SECRET;
   if (!secret) {
-    console.error("LDC_SECRET 未配置");
+    console.error("LDC_CLIENT_SECRET 未配置");
     return new NextResponse("fail", { status: 500 });
   }
 
   // 验证商户号
-  const merchantPid = process.env.LDC_PID;
+  const merchantPid = process.env.LDC_CLIENT_ID;
   if (!merchantPid) {
-    console.error("LDC_PID 未配置");
+    console.error("LDC_CLIENT_ID 未配置");
     return new NextResponse("fail", { status: 500 });
   }
 

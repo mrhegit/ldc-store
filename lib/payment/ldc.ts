@@ -119,11 +119,11 @@ export function createPayment(
   siteUrl: string
 ): PaymentFormData {
   let gateway = process.env.LDC_GATEWAY || "https://credit.linux.do/epay";
-  const pid = process.env.LDC_PID;
-  const secret = process.env.LDC_SECRET;
+  const pid = process.env.LDC_CLIENT_ID;
+  const secret = process.env.LDC_CLIENT_SECRET;
 
   if (!pid || !secret) {
-    throw new Error("支付配置未设置：请在 .env 文件中配置 LDC_PID 和 LDC_SECRET");
+    throw new Error("支付配置未设置：请在 .env 文件中配置 LDC_CLIENT_ID 和 LDC_CLIENT_SECRET");
   }
 
   // 确保网关地址格式正确
@@ -170,8 +170,8 @@ export async function queryPaymentOrder(
   tradeNo: string
 ): Promise<OrderQueryResult> {
   const gateway = process.env.LDC_GATEWAY || "https://credit.linux.do/epay";
-  const pid = process.env.LDC_PID;
-  const secret = process.env.LDC_SECRET;
+  const pid = process.env.LDC_CLIENT_ID;
+  const secret = process.env.LDC_CLIENT_SECRET;
 
   if (!pid || !secret) {
     throw new Error("支付配置未设置");
@@ -202,8 +202,8 @@ export async function refundOrder(
   money: string
 ): Promise<{ code: number; msg: string }> {
   const gateway = process.env.LDC_GATEWAY || "https://credit.linux.do/epay";
-  const pid = process.env.LDC_PID;
-  const secret = process.env.LDC_SECRET;
+  const pid = process.env.LDC_CLIENT_ID;
+  const secret = process.env.LDC_CLIENT_SECRET;
 
   if (!pid || !secret) {
     throw new Error("支付配置未设置");

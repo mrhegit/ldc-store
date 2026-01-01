@@ -68,8 +68,8 @@
 | `AUTH_SECRET` | 加密密钥（运行 `openssl rand -base64 32` 生成） | `abc123...` |
 | `AUTH_TRUST_HOST` | 信任主机 | `true` |
 | `ADMIN_PASSWORD` | 管理员密码 | `your-password` |
-| `LDC_PID` | Linux DO Credit Client ID | `12345` |
-| `LDC_SECRET` | Linux DO Credit Secret | `abc123...` |
+| `LDC_CLIENT_ID` | Linux DO Credit Client ID | `12345` |
+| `LDC_CLIENT_SECRET` | Linux DO Credit Client Secret | `abc123...` |
 
 必填变量（OAuth2 登录）：
 
@@ -248,7 +248,7 @@ A: 检查以下项目：
 
 A: 检查以下项目：
 1. 回调 URL 是否正确（注意 https）
-2. `LDC_PID` 和 `LDC_SECRET` 是否正确
+2. `LDC_CLIENT_ID` 和 `LDC_CLIENT_SECRET` 是否正确
 3. 确保网站可公网访问
 
 ### Q: OAuth2 登录失败

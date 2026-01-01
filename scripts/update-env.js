@@ -35,8 +35,8 @@ ADMIN_USERNAMES=""
 # Linux DO Credit 支付配置 (必填)
 # ============================================
 # 在 https://credit.linux.do 创建应用后获取
-LDC_PID="your_client_id"
-LDC_SECRET="your_client_secret"
+LDC_CLIENT_ID="your_client_id"
+LDC_CLIENT_SECRET="your_client_secret"
 
 # 支付网关地址 (一般无需修改)
 LDC_GATEWAY="https://credit.linux.do/epay"
