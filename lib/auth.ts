@@ -131,7 +131,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           console.log("[JWT Callback] account provider:", account?.provider);
         }
         
+        // 重要：同时设置 id 和 sub，确保用户 ID 在 token 刷新时保持一致
+        // sub 是 JWT 标准字段，NextAuth v5 依赖它来识别用户
         token.id = user.id;
+        token.sub = user.id;
         token.role = (user as { role?: string }).role;
         // 保存 OAuth 用户的额外信息
         if (account?.provider === "linux-do") {
@@ -160,7 +163,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
+        // 使用 token.id 或 token.sub 作为用户 ID（确保兼容性）
+        session.user.id = (token.id || token.sub) as string;
         (session.user as { role?: string }).role = token.role as string;
         // 传递 OAuth 用户信息到 session
         (session.user as { username?: string }).username = token.username as string;
