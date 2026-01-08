@@ -1,0 +1,44 @@
+import Link from "next/link";
+import { XCircle } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { OrderReceiptView } from "@/components/store/order-receipt-view";
+import { getOrderReceiptByNo } from "@/lib/actions/orders";
+
+export default async function OrderReceiptPage({
+  params,
+}: {
+  params: { orderNo: string };
+}) {
+  const result = await getOrderReceiptByNo(params.orderNo);
+
+  if (!result.success || !result.data) {
+    return (
+      <div className="mx-auto max-w-md px-4 py-12">
+        <Card>
+          <CardContent className="pt-6 text-center space-y-4">
+            <XCircle className="mx-auto h-12 w-12 text-muted-foreground" />
+            <div className="space-y-1">
+              <div className="text-lg font-semibold">无法获取支付凭证</div>
+              <div className="text-sm text-muted-foreground">
+                {result.message || "请稍后重试"}
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Button asChild variant="outline" className="flex-1">
+                <Link href="/order/my">我的订单</Link>
+              </Button>
+              <Button asChild className="flex-1">
+                <Link href="/">返回首页</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  return <OrderReceiptView receipt={result.data} />;
+}
+

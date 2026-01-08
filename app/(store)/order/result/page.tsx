@@ -15,6 +15,7 @@ import {
   Home,
   Copy,
   Package,
+  ReceiptText,
   XCircle,
   ShoppingBag,
 } from "lucide-react";
@@ -321,19 +322,29 @@ export default function OrderResultPage({ searchParams }: OrderResultPageProps) 
           )}
 
           {/* Actions */}
-          <div className="flex gap-3">
-            <Link href="/order/my" className="flex-1">
-              <Button variant="outline" className="w-full">
-                <ShoppingBag className="mr-2 h-4 w-4" />
-                我的订单
-              </Button>
-            </Link>
-            <Link href="/" className="flex-1">
-              <Button variant="ghost" className="w-full">
-                <Home className="mr-2 h-4 w-4" />
-                首页
-              </Button>
-            </Link>
+          <div className="space-y-3">
+            {isPaid ? (
+              <Link href={`/order/receipt/${order.orderNo}`}>
+                <Button variant="outline" className="w-full">
+                  <ReceiptText className="mr-2 h-4 w-4" />
+                  支付成功凭证
+                </Button>
+              </Link>
+            ) : null}
+            <div className="flex gap-3">
+              <Link href="/order/my" className="flex-1">
+                <Button variant="outline" className="w-full">
+                  <ShoppingBag className="mr-2 h-4 w-4" />
+                  我的订单
+                </Button>
+              </Link>
+              <Link href="/" className="flex-1">
+                <Button variant="ghost" className="w-full">
+                  <Home className="mr-2 h-4 w-4" />
+                  首页
+                </Button>
+              </Link>
+            </div>
           </div>
         </CardContent>
       </Card>
